@@ -4,8 +4,23 @@
  * This is a general purpose Gradle build.
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.5.1/samples
  */
-tasks.register('build') {
+
+plugins {
+    id 'base'
+}
+
+version = "1.0.0"
+
+tasks.register('ensureDirectory') {
     doLast {
-        println 'Building project..... OK'
+        mkdir "dist"
+        println 'Creating folders..... OK'
     }
 }
+
+task generatePackage(type: Zip) { 
+    from 'public'
+    destinationDir = file("dist")
+    archiveName = "my-distitrubion.zip" 
+}
+
