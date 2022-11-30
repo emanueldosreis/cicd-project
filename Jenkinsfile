@@ -20,7 +20,7 @@ pipeline {
                                 sourceFiles: 'dist/my-distitrubion.zip',
                                 removePrefix: 'dist/',
                                 remoteDirectory: '/tmp',
-                                //execCommand: 'unzip /tmp/my-distitrubion.zip -d /home/deploy/wwww/'
+                                execCommand: 'unzip /tmp/my-distitrubion.zip -d /wwww/'
                                 ) ]
                          ) ]
                 )
