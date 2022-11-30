@@ -9,8 +9,8 @@ pipeline {
            }
         stage('deployStaging') {
             steps {
-                echo 'Deploying to Staging...'
-                withCredentials([usernamePassword(credentialsId: 'Deploy', passwordVariable: 'passwordVar', usernameVariable: 'usernameVar')]) {
+                echo 'Deploying to Staging'
+		withCredentials([usernamePassword(credentialsId: 'Deploy', passwordVariable: 'passwordVar', usernameVariable: 'usernameVar')]) {
                 // some block
                     sshPublisher(
                         failOnError: true,
@@ -24,6 +24,7 @@ pipeline {
                                 ) ]
                          ) ]
                 )
+        }
         }
     	}
         stage('testingStaging') {
