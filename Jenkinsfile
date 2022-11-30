@@ -21,6 +21,7 @@ pipeline {
                                 removePrefix: 'dist/',
                                 remoteDirectory: '/tmp',
                                 execCommand: 'unzip /tmp/my-distitrubion.zip -d /wwww/'
+//
                                 ) ]
                          ) ]
                 )
