@@ -17,10 +17,10 @@ pipeline {
                         continueOnError: false,
                         publishers: [ sshPublisherDesc( configName: 'staging', sshCredentials: [ username: "$usernameVar", encryptedPassphrase: "$passwordVar" ],
                         transfers: [ sshTransfer(
-                                sourceFiles: 'dist/trainSchedule.zip',
+                                sourceFiles: 'dist/my-distitrubion.zip',
                                 removePrefix: 'dist/',
                                 remoteDirectory: '/tmp',
-                                execCommand: 'unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+                                execCommand: 'unzip /tmp/my-distitrubion.zip -d /home/deploy/wwww/'
                                 ) ]
                          ) ]
                 )
