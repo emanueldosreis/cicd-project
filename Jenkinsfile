@@ -34,9 +34,26 @@ pipeline {
         }
         }
         stage('deployProd') {
-            steps {
-                echo 'Deploying to Prod...'
+             steps {
+                echo 'Deploying to Prod'
+		input 'Does the staging environment look good ?'
+		input 'Are you sure ?' 
+		withCredentials([usernamePassword(credentialsId: 'Deploy', passwordVariable: 'passwordVar', usernameVariable: 'usernameVar')]) {
+                // some block
+                    sshPublisher(
+                        failOnError: true,
+                        continueOnError: false,
+                        publishers: [ sshPublisherDesc( configName: 'production', sshCredentials: [ username: "$usernameVar", encryptedPassphrase: "$passwordVar" ],
+                        transfers: [ sshTransfer(
+                                sourceFiles: 'dist/my-distitrubion.zip',
+                                removePrefix: 'dist/',
+                                remoteDirectory: '/',
+                                execCommand: 'unzip -o my-distitrubion.zip -d wwww/ && rm my-distitrubion.zip'
+                                ) ]
+                         ) ]
+                )
         }
         }
+    	}
 }
 }
