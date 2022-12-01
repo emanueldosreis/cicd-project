@@ -37,7 +37,6 @@ pipeline {
              steps {
                 echo 'Deploying to Prod'
 		input 'Does the staging environment look good ?'
-		input 'Are you sure ?' 
 		withCredentials([usernamePassword(credentialsId: 'Deploy', passwordVariable: 'passwordVar', usernameVariable: 'usernameVar')]) {
                 // some block
                     sshPublisher(
