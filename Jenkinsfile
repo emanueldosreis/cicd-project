@@ -29,7 +29,8 @@ pipeline {
     	}
         stage('testingStaging') {
             steps {
-                echo 'Deploying to Prod...'
+                echo 'Testing staging...'
+		sh 'curl http://a4e5c46d762c.mylabserver.com:80'
         }
         }
         stage('deployProd') {
