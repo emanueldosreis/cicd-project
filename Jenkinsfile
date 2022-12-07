@@ -10,9 +10,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    app = docker.build("emanueldosreis/mycicd-0.2")
+                    app = docker.build("emanueldosreis/mycicd-0.2-${env.BUILD_TAG}")
                     app.inside {
-                        sh 'echo $(netstat -antp | grep :80)'
+                        sh '$(netstat -ant | grep :80)'
+                        sh 'echo $?'
                     }
                 }   
            }
