@@ -12,7 +12,7 @@ pipeline {
                 script {
                     app = docker.build("emanueldosreis/mycicd-0.2")
                     app.inside {
-                        sh 'echo $(curl localhost:80)'
+                        sh 'echo $(netstat -antp | grep :80)'
                     }
                 }   
            }
