@@ -12,9 +12,19 @@ pipeline {
                 script {
                     app = docker.build("emanueldosreis/mycicd-0.2-${env.BUILD_NUMBER}")
                     app.inside {
-                        sh '$(/usr/local/apache2/bin/httpd -k start)'
-                        sh 'echo $?'
-                        sh "echo ${env.BUILD_NUMBER}"
+                        sh 'echo "from within the Docker"'
+                        sh 'ls'
+                    }
+                }   
+           }
+           }  
+        stage('Push New Docker Image') {
+            steps {
+                script {
+                    app.withRegistry('https://registry.hub.docker.com/', 'docker_hub_login') {
+                    app.push.push('${env.BUILD_NUMBER}')
+                    app.push.push('latest')     
+                    }
                     }
                 }   
            }
