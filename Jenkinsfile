@@ -12,7 +12,6 @@ pipeline {
                 script {
                     app = docker.build("emanueldosreis/mycicd-0.2")
                     app.inside {
-                        sh 'echo "from within the Docker"'
                         sh 'ls'
                     }
                 }   
