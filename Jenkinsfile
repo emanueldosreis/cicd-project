@@ -25,6 +25,23 @@ pipeline {
                     }
                 }   
            }
-           }    
+           }  
+        
+        def remote = [:]
+        remote.name = "Staging Server"
+        remote.host = "a4e5c46d762c.mylabserver.com"
+        remote.allowAnyHosts = true
+
+        node {
+            withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                remote.user = userName
+                remote.identityFile = identity
+                stage("SSH Steps Rocks!") {
+                    sshCommand remote: remote, command: 'whoami'
+                }
+            }
+        }
+        
+        
 }
 }
